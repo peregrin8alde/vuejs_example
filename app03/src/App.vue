@@ -1,18 +1,22 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Hello App!</h1>
+    <p>
+      <!-- ナビゲーションに router-link コンポーネントを使う -->
+      <!-- リンク先を `to` プロパティに指定します -->
+      <!-- デフォルトで `<router-link>` は `<a>` タグとして描画されます -->
+      <router-link to="/foo">Go to Foo</router-link>
+      <router-link to="/bar">Go to Bar</router-link>
+    </p>
+    <!-- ルートアウトレット -->
+    <!-- ルートとマッチしたコンポーネントがここへ描画されます -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
+  name: 'app'
 }
 </script>
 
