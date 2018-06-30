@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 // 1. ルートコンポーネントを定義します
 import HelloWorld from './components/HelloWorld.vue'
 import HelloWorld2 from './components/HelloWorld2.vue'
+import Child from './components/Child.vue'
 
 // 2. ルートをいくつか定義します
 // 各ルートは 1 つのコンポーネントとマッピングされる必要があります。
@@ -14,8 +15,22 @@ import HelloWorld2 from './components/HelloWorld2.vue'
 // またはコンポーネントオプションのオブジェクトでも構いません。
 // ネストされたルートに関しては後で説明します
 const routes = [
-  { path: '/foo/:msg', component: HelloWorld, props: true},
-  { path: '/bar', component: HelloWorld2 }
+  {
+    path: '/foo/:msg',
+    component: HelloWorld,
+    props: true,
+    children: [
+      {
+        path: 'child',
+        component: Child
+      }
+    ]
+  },
+  {
+    path: '/bar',
+    component: HelloWorld2
+  }
+
 ]
 
 // 3. ルーターインスタンスを作成して、ルートオプションを渡します
