@@ -1,12 +1,15 @@
 <template>
   <div class="hello">
-    <h1>{{ $route.params.msg }}</h1>
+    <h1>{{ msg }}</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld'
+  name: 'HelloWorld',
+  props: [
+    'msg'
+  ]
 }
 </script>
 
