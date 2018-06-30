@@ -18,17 +18,9 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from '../config/firebase'
 
-var config = {
-  apiKey: process.env.VUE_APP_APIKEY,
-  authDomain: process.env.VUE_APP_AUTHDOMAIN,
-  databaseURL: process.env.VUE_APP_DATABASEURL,
-  projectId: process.env.VUE_APP_PROJECTID,
-  storageBucket: process.env.VUE_APP_STORAGEBUCKET,
-  messagingSenderId: process.env.VUE_APP_MESSAGINGSENDERID
-}
-firebase.initializeApp(config)
+var auth = firebase.auth()
 
 export default {
   name: 'SignIn',
@@ -43,7 +35,7 @@ export default {
   },
   mounted: function () {
     var self = this
-    firebase.auth().onAuthStateChanged(function(user) {
+    auth.onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
         self.user.email = user.email;
@@ -56,7 +48,7 @@ export default {
   // methods
   methods: {
     signUp: function () {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
+      auth.createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -65,7 +57,7 @@ export default {
       })
     },
     signIn: function () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+      auth.signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -74,7 +66,7 @@ export default {
       })
     },
     signOut: function () {
-      firebase.auth().signOut().then(function() {
+      auth.signOut().then(function() {
       }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;

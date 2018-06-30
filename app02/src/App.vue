@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <SignIn :user=user />
+    <DataBase />
   </div>
 </template>
 
 <script>
 import SignIn from './components/SignIn.vue'
+import DataBase from './components/DataBase.vue'
 
 export default {
   name: 'app',
   components: {
-    SignIn
+    SignIn,
+    DataBase
   },
   data: function () {
     return {
