@@ -8,6 +8,9 @@ Vue.use(VueRouter)
 import HelloWorld from './components/HelloWorld.vue'
 import HelloWorld2 from './components/HelloWorld2.vue'
 import Child from './components/Child.vue'
+import Login from './components/Login.vue'
+
+import Auth from './api/Auth.js'
 
 // 2. ルートをいくつか定義します
 // 各ルートは 1 つのコンポーネントとマッピングされる必要があります。
@@ -22,13 +25,18 @@ const routes = [
     children: [
       {
         path: 'child',
-        component: Child
+        component: Child,
+        meta: { requiresAuth: true }
       }
     ]
   },
   {
     path: '/bar',
     component: HelloWorld2
+  },
+  {
+    path: '/login',
+    component: Login
   }
 
 ]
@@ -38,6 +46,23 @@ const routes = [
 // この例ではシンプルにしましょう
 const router = new VueRouter({
   routes // `routes: routes` の短縮表記
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // このルートはログインされているかどうか認証が必要です。
+    // もしされていないならば、ログインページにリダイレクトします。
+    if (!Auth.loggedIn) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // next() を常に呼び出すようにしてください!
+  }
 })
 
 export default router
