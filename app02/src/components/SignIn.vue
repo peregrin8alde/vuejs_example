@@ -13,7 +13,7 @@
     <form id="form" v-on:submit.prevent="signOut">
       <input type="submit" value="Sign Out">
     </form>
-    <p>{{ signInState }}</p>
+    <p>{{ user.signInState }}</p>
   </div>
 </template>
 
@@ -32,12 +32,26 @@ firebase.initializeApp(config)
 
 export default {
   name: 'SignIn',
+  props: [
+    'user',
+  ],
   data: function () {
     return {
       email: '',
       password: '',
-      signInState: ''
     }
+  },
+  mounted: function () {
+    var self = this
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        self.user.email = user.email;
+        self.user.signInState = 'Sign in'
+      } else {
+        self.user.signInState = 'Signed out'
+      }
+    })
   },
   // methods
   methods: {
@@ -58,17 +72,9 @@ export default {
         
         alert(errorMessage)
       })
-      var user = firebase.auth().currentUser;
-      
-      if (user) {
-        this.signInState = 'Signed In'
-      } else {
-        this.signInState = 'Not Signed In'
-      }
     },
     signOut: function () {
       firebase.auth().signOut().then(function() {
-        this.signInState = 'Not Signed In'
       }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;

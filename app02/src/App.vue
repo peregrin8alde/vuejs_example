@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <SignIn />
+    <SignIn :user=user />
   </div>
 </template>
 
@@ -11,7 +11,16 @@ export default {
   name: 'app',
   components: {
     SignIn
-  }
+  },
+  data: function () {
+    return {
+      user: {
+        email: '',
+        password: '',
+        signInState: ''
+      }
+    }
+  },
 }
 </script>
 
