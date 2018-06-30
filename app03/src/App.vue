@@ -5,7 +5,7 @@
       <!-- ナビゲーションに router-link コンポーネントを使う -->
       <!-- リンク先を `to` プロパティに指定します -->
       <!-- デフォルトで `<router-link>` は `<a>` タグとして描画されます -->
-      <router-link to="/foo">Go to Foo</router-link>
+      <router-link to="/foo/hello">Go to Foo</router-link>
       <router-link to="/bar">Go to Bar</router-link>
     </p>
     <!-- ルートアウトレット -->

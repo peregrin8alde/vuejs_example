@@ -14,7 +14,7 @@ import HelloWorld2 from './components/HelloWorld2.vue'
 // またはコンポーネントオプションのオブジェクトでも構いません。
 // ネストされたルートに関しては後で説明します
 const routes = [
-  { path: '/foo', component: HelloWorld },
+  { path: '/foo/:msg', component: HelloWorld },
   { path: '/bar', component: HelloWorld2 }
 ]
 
