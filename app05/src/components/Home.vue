@@ -13,15 +13,13 @@
         </blockquote>
       </v-layout>
     </v-slide-y-transition>
+    <router-view></router-view>
   </v-container>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+  name: 'Home',
 }
 </script>
 

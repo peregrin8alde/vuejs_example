@@ -1,20 +1,20 @@
 <template>
   <v-app>
     <v-navigation-drawer
-      persistent
       :mini-variant="miniVariant"
       :clipped="clipped"
       v-model="drawer"
-      enable-resize-watcher
       fixed
       app
     >
       <v-list>
-        <v-list-tile
+        <router-link
           value="true"
           v-for="(item, i) in items"
-          :key="i"
+          :key="item.title"
+          :to="{ name: item.linkName }"
         >
+        <v-list-tile>
           <v-list-tile-action>
             <v-icon v-html="item.icon"></v-icon>
           </v-list-tile-action>
@@ -22,6 +22,7 @@
             <v-list-tile-title v-text="item.title"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        </router-link>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
@@ -45,7 +46,7 @@
       </v-btn>
     </v-toolbar>
     <v-content>
-      <HelloWorld/>
+      <router-view></router-view>
     </v-content>
     <v-navigation-drawer
       temporary
@@ -70,22 +71,19 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  },
   data () {
     return {
       clipped: false,
       drawer: true,
       fixed: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
-      }],
+      items: [
+        { title: 'Dashboard', icon: 'dashboard', linkName: 'Dashboard' },
+        { title: 'Account', icon: 'account_box' },
+        { title: 'Admin', icon: 'gavel' }
+      ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
