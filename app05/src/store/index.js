@@ -5,11 +5,11 @@ let store = {
   },
   signIn: function() {
     if (this.debug) console.log('Signed In')
-    this.state.loggedIn = true
+    this.state.signedIn = true
   },
   signOut: function() {
     if (this.debug) console.log('Signed Out')
-    this.state.loggedIn = false
+    this.state.signedIn = false
   }
 }
 

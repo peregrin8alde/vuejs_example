@@ -37,12 +37,7 @@ export default {
   },
   methods: {
     signIn: function () {
-      console.log(this.user.username)
-      console.log(this.user.password)
-      
       store.signIn()
-      
-      console.log(this.$route.query.redirect)
       this.$router.push(this.$route.query.redirect)
     }
   }
