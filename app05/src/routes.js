@@ -1,27 +1,34 @@
-import Home from './components/Home'
-import Default from './components/Default.vue'
+import Home from './components/Home.vue'
 import NotFound from './components/404.vue'
 
-import Dashboard from './components/Dashboard.vue'
 import SignIn from './components/SignIn.vue'
+
+import Dashboard from './components/Dashboard.vue'
+import Settings from './components/Settings.vue'
 
 // Routes
 const routes = [
   {
     path: '/signin',
-    component: SignIn
+    component: SignIn,
+    name: 'SignIn',
   },
   {
     path: '/',
-    component: Home,
-    name: 'Home',
+    component: Dashboard,
+    name: 'Dashboard',
     children: [
-      { path: 'default', component: Default, alias: '' },
       {
-        path: 'dashboard',
-        component: Dashboard,
-        name: 'Dashboard',
-        meta: {description: 'Overview of environment', requiresAuth: true}
+        path: 'home',
+        component: Home,
+        name: 'Home',
+        alias: ''
+      },
+      {
+        path: 'settings',
+        component: Settings,
+        name: 'Settings',
+        meta: {description: 'Setting', requiresAuth: true}
       }
     ]
   },
